@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { useScrollLock } from "@/hooks/useScrollLock";
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export function CartDrawer() {
   const isOpen = useCartStore((s) => s.isOpen);
@@ -21,7 +22,7 @@ export function CartDrawer() {
   const itemCount = useCartItemCount();
   const [promoInput, setPromoInput] = useState("");
   const [promoError, setPromoError] = useState("");
-  const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const router = useRouter();
 
   useScrollLock(isOpen);
 
@@ -36,22 +37,10 @@ export function CartDrawer() {
     }
   };
 
-  const handleCheckout = async () => {
+  const handleCheckout = () => {
     if (items.length === 0) return;
-    setIsCheckingOut(true);
-    try {
-      const res = await fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items, promoCode }),
-      });
-      const data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
-      }
-    } catch {
-      setIsCheckingOut(false);
-    }
+    closeCart();
+    router.push("/checkout");
   };
 
   if (!isOpen) return null;
@@ -185,7 +174,6 @@ export function CartDrawer() {
               size="lg"
               className="w-full"
               onClick={handleCheckout}
-              isLoading={isCheckingOut}
             >
               Proceed to Checkout
             </Button>
