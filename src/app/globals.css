@@ -1,26 +1,92 @@
 @import "tailwindcss";
 
+@theme {
+  /* Brand Colors */
+  --color-olive-50: #f7f6f0;
+  --color-olive-100: #ede9d8;
+  --color-olive-200: #d8d0b8;
+  --color-olive-300: #b8a888;
+  --color-olive-400: #8a7a5c;
+  --color-olive-500: #5e6b46;
+  --color-olive-600: #4a5c3a;
+  --color-olive-700: #3a4a2d;
+  --color-olive-800: #2a3820;
+  --color-olive-900: #1e2718;
+
+  --color-cream-50: #fdfbf5;
+  --color-cream-100: #f9f4e8;
+  --color-cream-200: #f0e8d0;
+  --color-cream-300: #e4d6b8;
+
+  --color-gold-50: #fdf8e8;
+  --color-gold-100: #fdf3d7;
+  --color-gold-200: #f9e49c;
+  --color-gold-300: #f0cc60;
+  --color-gold-400: #d4a843;
+  --color-gold-500: #b8922e;
+  --color-gold-600: #9a7520;
+  --color-gold-700: #7a5c18;
+
+  /* Typography */
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Custom font sizes */
+  --text-display-xl: 4.5rem;
+  --text-display-xl--line-height: 1.05;
+  --text-display-xl--letter-spacing: -0.025em;
+
+  --text-display-lg: 3.5rem;
+  --text-display-lg--line-height: 1.1;
+  --text-display-lg--letter-spacing: -0.02em;
+
+  --text-display-md: 2.5rem;
+  --text-display-md--line-height: 1.15;
+  --text-display-md--letter-spacing: -0.015em;
+}
+
+/* Base styles */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fdfbf5;
+  --foreground: #1e2718;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection */
+::selection {
+  background-color: #d4a843;
+  color: #1e2718;
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid #d4a843;
+  outline-offset: 2px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f9f4e8;
+}
+::-webkit-scrollbar-thumb {
+  background: #4a5c3a;
+  border-radius: 3px;
 }
